@@ -1,4 +1,4 @@
-import { Service } from '@/types';
+import { Service, ServiceDetail } from '@/types';
 
 export const services: Service[] = [
   {
@@ -46,3 +46,44 @@ export const services: Service[] = [
     metaDescription: 'Build robust and scalable web applications with our top-tier backend development services.'
   }
 ];
+
+export const serviceDetails: ServiceDetail[] = services.map((service) => ({
+  ...service,
+  heroTitle: `${service.title} That Ranks.`,
+  fullDescription: `At SafiDotTech, we don't just provide ${service.title.toLowerCase()}; we engineer solutions that directly impact your bottom line. By combining modern MERN stack architecture with deep semantic SEO principles, we ensure your digital assets are built for speed, security, and scalability. Every component is crafted with precision to deliver a premium user experience that converts traffic into revenue while maintaining an impeccable codebase that future development teams will love.`,
+  baseUSD: 1499,
+  basePKR: 420000,
+  gallery: ['/images/placeholder.svg', '/images/placeholder.svg'],
+  process: [
+    {
+      number: '01',
+      title: 'Discovery',
+      description: 'We begin by understanding your specific needs and goals.'
+    },
+    {
+      number: '02',
+      title: 'Strategy',
+      description: 'We outline the architecture and technical approach.'
+    },
+    {
+      number: '03',
+      title: 'Execution',
+      description: 'Our engineers build your solution to the highest standards.'
+    },
+    {
+      number: '04',
+      title: 'Launch & Handoff',
+      description: 'We deliver the final product with comprehensive testing.'
+    }
+  ],
+  faqs: [
+    {
+      question: `What makes your ${service.title} different?`,
+      answer: `Our ${service.title} approach is inherently performance and SEO-driven. We don't bolt on optimization after the fact; it is baked into our development lifecycle from day one.`
+    },
+    {
+      question: 'How long does a typical project take?',
+      answer: 'Depending on the complexity, our timelines range from 4 to 8 weeks, ensuring high quality without unnecessary delays.'
+    }
+  ]
+}));

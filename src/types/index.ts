@@ -19,6 +19,10 @@ export interface Service {
 }
 export interface ServiceDetail extends Service {
   heroTitle: string;
+  fullDescription: string;
+  baseUSD: number;
+  basePKR: number;
+  gallery: string[];
   process: ProcessStep[];
   faqs: FAQItem[];
 }

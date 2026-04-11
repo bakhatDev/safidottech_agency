@@ -1,6 +1,7 @@
 import type { CMSAdapter } from './cmsInterface';
 import { blogPosts } from '@/data/blog';
 import { portfolioItems } from '@/data/portfolio';
+import { services, serviceDetails } from '@/data/services';
 
 /**
  * mockAdapter
@@ -22,5 +23,13 @@ export const mockAdapter: CMSAdapter = {
   
   getPortfolioItem: async (slug: string) => {
     return portfolioItems.find((p) => p.slug === slug) ?? null;
+  },
+
+  getServices: async () => {
+    return services;
+  },
+
+  getService: async (slug: string) => {
+    return serviceDetails.find((s) => s.slug === slug) ?? null;
   },
 };

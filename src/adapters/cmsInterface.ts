@@ -1,4 +1,4 @@
-import type { BlogPost, PortfolioItem, RawBlogPost, RawPortfolioItem } from '@/types';
+import type { BlogPost, PortfolioItem, RawBlogPost, RawPortfolioItem, Service, ServiceDetail } from '@/types';
 
 /**
  * CMSAdapter Interface
@@ -9,6 +9,8 @@ export interface CMSAdapter {
   getBlogPost(slug: string): Promise<BlogPost | null>;
   getPortfolioItems(): Promise<PortfolioItem[]>;
   getPortfolioItem(slug: string): Promise<PortfolioItem | null>;
+  getServices(): Promise<Service[]>;
+  getService(slug: string): Promise<ServiceDetail | null>;
 }
 
 /**
