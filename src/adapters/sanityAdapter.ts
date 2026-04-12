@@ -16,8 +16,8 @@ import {
   transformPortfolioItem 
 } from './transformers';
 
-const SANITY_PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '';
-const SANITY_DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID || '';
+const SANITY_DATASET = process.env.SANITY_DATASET || 'production';
 const SANITY_API_VERSION = '2021-10-21';
 
 const SANITY_URL = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}`;
