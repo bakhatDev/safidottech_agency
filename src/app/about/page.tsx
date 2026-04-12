@@ -76,7 +76,7 @@ export default function AboutPage() {
         title="About Safi Dot Tech"
         eyebrow="Our Story"
         breadcrumbs={[
-          { label: 'Home', href: '/' },
+          { label: 'Home', href: '/', icon: 'house' },
           { label: 'About' },
         ]}
       />

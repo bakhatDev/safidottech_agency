@@ -27,7 +27,7 @@ export default function PricingPage() {
         title="Transparent Pricing"
         eyebrow="Our Packages"
         breadcrumbs={[
-          { label: 'Home', href: '/' },
+          { label: 'Home', href: '/', icon: 'house' },
           { label: 'Pricing' },
         ]}
       />

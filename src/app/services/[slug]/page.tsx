@@ -65,6 +65,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       <PageBanner
         title={service.title}
         breadcrumbs={[
+          { label: 'Home', href: '/', icon: 'house' },
           { label: 'Services', href: '/services' },
           { label: service.title }
         ]}

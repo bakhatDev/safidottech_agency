@@ -21,7 +21,7 @@ export default function ServicesPage() {
         eyebrow="What We Offer"
         subtitle="From full-stack web development to SEO recovery, e-commerce builds to speed optimisation..."
         breadcrumbs={[
-          { label: 'Home', href: '/' },
+          { label: 'Home', href: '/', icon: 'house' },
           { label: 'Services' },
         ]}
       />

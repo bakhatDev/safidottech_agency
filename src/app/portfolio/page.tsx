@@ -11,7 +11,7 @@ export default function PortfolioPage() {
       <PageBanner 
         title="Our Work" 
         eyebrow="Case Studies" 
-        breadcrumbs={[{label: 'Home', href: '/'}, {label: 'Portfolio'}]} 
+        breadcrumbs={[{label: 'Home', href: '/', icon: 'house'}, {label: 'Portfolio'}]} 
       />
       <PortfolioClient items={portfolioItems} />
     </main>
