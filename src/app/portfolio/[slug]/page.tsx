@@ -11,7 +11,7 @@ import { cn } from '@/lib/cn';
 import { Metadata } from 'next';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
@@ -20,8 +20,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const item = portfolioItems.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const item = portfolioItems.find((p) => p.slug === slug);
   
   if (!item) return {};
 
@@ -31,8 +32,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-export default function PortfolioDetailsPage({ params }: PageProps) {
-  const item = portfolioItems.find((p) => p.slug === params.slug);
+export default async function PortfolioDetailsPage({ params }: PageProps) {
+  const { slug } = await params;
+  const item = portfolioItems.find((p) => p.slug === slug);
 
   if (!item) {
     notFound();

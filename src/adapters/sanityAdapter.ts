@@ -71,4 +71,16 @@ export const sanityAdapter: CMSAdapter = {
     const result = await sanityFetch<RawPortfolioItem>(query);
     return result.length > 0 ? transformPortfolioItem(result[0] as unknown as RawPortfolioItem) : null;
   },
+
+  getServices: async (): Promise<any[]> => {
+    const query = '*[_type == "service"] | order(orderRank asc)';
+    const results = await sanityFetch<any>(query);
+    return results; // Transformers for services can be added once schemas are final
+  },
+
+  getService: async (slug: string): Promise<any | null> => {
+    const query = `*[_type == "service" && slug.current == "${slug}"][0]`;
+    const result = await sanityFetch<any>(query);
+    return result.length > 0 ? result[0] : null;
+  },
 };

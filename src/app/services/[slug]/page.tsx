@@ -18,7 +18,7 @@ import { ProcessStep } from '@/types';
 // For the features list, we will just use native rendering, and if needed later, wrap it.
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -29,7 +29,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const service = await ContentService.getService(params.slug);
+  const { slug } = await params;
+  const service = await ContentService.getService(slug);
   
   if (!service) {
     return { title: 'Service Not Found | SafiDotTech' };
@@ -42,7 +43,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
-  const service = await ContentService.getService(params.slug);
+  const { slug } = await params;
+  const service = await ContentService.getService(slug);
   
   if (!service) {
     notFound();

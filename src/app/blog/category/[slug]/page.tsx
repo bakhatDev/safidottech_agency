@@ -7,7 +7,7 @@ import BlogCard from '@/components/shared/BlogCard';
 import Button from '@/components/shared/Button';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -18,8 +18,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const posts = await getBlogPostsByCategory(params.slug);
-  const categoryName = posts.length > 0 ? posts[0].category : params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
+  const { slug } = await params;
+  const posts = await getBlogPostsByCategory(slug);
+  const categoryName = posts.length > 0 ? posts[0].category : slug.charAt(0).toUpperCase() + slug.slice(1);
 
   return {
     title: `${categoryName} Guides | Safi Dot Tech`,
@@ -28,12 +29,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function CategoryArchivePage({ params }: PageProps) {
-  const posts = await getBlogPostsByCategory(params.slug);
+  const { slug } = await params;
+  const posts = await getBlogPostsByCategory(slug);
   
   // Try to get actual category name from first post, fallback to slug
   const categoryName = posts.length > 0 
     ? posts[0].category 
-    : params.slug.charAt(0).toUpperCase() + params.slug.slice(1);
+    : slug.charAt(0).toUpperCase() + slug.slice(1);
 
   return (
     <main className="bg-[#111111] min-h-screen">

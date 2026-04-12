@@ -5,7 +5,7 @@ export const pricingTiers: PricingTier[] = [
     id: 'p1',
     name: 'Starter',
     priceUSD: 499,
-    pricePKR: 139720,
+    pricePKR: 139000,
     description: 'Perfect for small businesses looking to establish a basic online presence.',
     features: ['Responsive 5-page Website', 'Basic SEO Setup', 'Contact Form Integration', '1 Month Free Support'],
     isPopular: false,

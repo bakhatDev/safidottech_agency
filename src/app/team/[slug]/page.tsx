@@ -11,7 +11,7 @@ import OptimizedImage from '@/components/shared/OptimizedImage';
 import { TeamMember } from '@/types';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -21,7 +21,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const member = teamMembers.find((m) => m.slug === params.slug);
+  const { slug } = await params;
+  const member = teamMembers.find((m) => m.slug === slug);
   
   if (!member) {
     return { title: 'Member Not Found | SafiDotTech' };
@@ -34,7 +35,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function TeamMemberPage({ params }: PageProps) {
-  const member = teamMembers.find((m) => m.slug === params.slug);
+  const { slug } = await params;
+  const member = teamMembers.find((m) => m.slug === slug);
 
   if (!member) {
     notFound();

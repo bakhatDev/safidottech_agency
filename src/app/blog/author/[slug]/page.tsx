@@ -9,7 +9,7 @@ import BlogCard from '@/components/shared/BlogCard';
 import OptimizedImage from '@/components/shared/OptimizedImage';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -19,7 +19,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const member = teamMembers.find((m) => m.slug === params.slug);
+  const { slug } = await params;
+  const member = teamMembers.find((m) => m.slug === slug);
   
   if (!member) {
     return { title: 'Author Not Found | Safi Dot Tech' };
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function AuthorArchivePage({ params }: PageProps) {
-  const member = teamMembers.find((m) => m.slug === params.slug);
+  const { slug } = await params;
+  const member = teamMembers.find((m) => m.slug === slug);
 
   if (!member) {
     notFound();

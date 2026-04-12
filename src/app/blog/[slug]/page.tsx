@@ -9,7 +9,7 @@ import { formatDate } from '@/utils/formatters';
 import Link from 'next/link';
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const post = await getBlogPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
   
   if (!post) {
     return { title: 'Post Not Found | SafiDotTech' };
@@ -33,7 +34,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const post = await getBlogPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
