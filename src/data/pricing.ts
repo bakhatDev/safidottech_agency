@@ -10,7 +10,7 @@ export const pricingTiers: PricingTier[] = [
     features: ['Responsive 5-page Website', 'Basic SEO Setup', 'Contact Form Integration', '1 Month Free Support'],
     isPopular: false,
     ctaLabel: 'Get Started',
-    ctaHref: '/contact'
+    ctaHref: '/contact?package=starter'
   },
   {
     id: 'p2',
@@ -21,7 +21,7 @@ export const pricingTiers: PricingTier[] = [
     features: ['Custom Web Application', 'Advanced SEO & Analytics', 'CMS Integration', 'E-commerce Capabilities', '3 Months Support'],
     isPopular: true,
     ctaLabel: 'Start Growing',
-    ctaHref: '/contact'
+    ctaHref: '/contact?package=growth'
   },
   {
     id: 'p3',
@@ -32,6 +32,6 @@ export const pricingTiers: PricingTier[] = [
     features: ['Bespoke Enterprise Architecture', 'Full-stack Development', 'Performance Optimization', 'Dedicated Account Manager', '1 Year Priority Support'],
     isPopular: false,
     ctaLabel: 'Contact Sales',
-    ctaHref: '/contact'
+    ctaHref: '/contact?package=enterprise'
   }
 ];
