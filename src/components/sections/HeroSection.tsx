@@ -138,15 +138,17 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column — Visual */}
-          <div className="hero-visual relative aspect-square max-w-[440px] mx-auto hidden lg:block" style={{ opacity: 0 }}>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,_rgba(194,240,38,0.08)_0%,_transparent_70%)] rounded-full" />
+          <div className="hero-visual relative w-full aspect-square max-w-[440px] mx-auto hidden lg:flex items-center justify-center" style={{ opacity: 0 }}>
+            {/* Ambient Background Glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,_rgba(194,240,38,0.1)_0%,_transparent_70%)] rounded-full blur-2xl" />
+            
             <OptimizedImage
-              src="/images/Hero Visual.png"
+              src="/images/hero-visual.png"
               alt="SafiDotTech Brand Visual"
               fill
               priority={true}
               objectFit="contain"
-              className="drop-shadow-2xl"
+              className="drop-shadow-[0_20px_50px_rgba(194,240,38,0.15)] transition-transform duration-700 hover:scale-105"
             />
           </div>
         </div>
