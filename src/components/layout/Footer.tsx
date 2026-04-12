@@ -24,7 +24,11 @@ export default function Footer() {
         body: JSON.stringify({ email }),
       });
 
-      if (!res.ok) throw new Error('Failed to subscribe.');
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to subscribe.');
+      }
       
       setSubmitStatus('success');
       setEmail('');
