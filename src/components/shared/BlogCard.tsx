@@ -48,7 +48,7 @@ export default function BlogCard({ post, className, variant = 'default' }: BlogC
               {post.category}
             </span>
           )}
-          <span className="text-[#999] text-[10px] uppercase tracking-wider">
+          <span className="text-[#999] text-[10px] uppercase tracking-wider" suppressHydrationWarning>
             {formatDate(post.date)}
           </span>
         </div>

@@ -47,7 +47,7 @@ export interface TeamMember {
   slug: string;
   name: string;
   role: string;
-  category: 'Management' | 'Development' | 'Design' | 'SEO';
+  category: 'Management' | 'Development' | 'Design' | 'SEO' | 'Marketing';
   image: string;
   bio: string;
   skills: string[];
