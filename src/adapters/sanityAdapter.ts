@@ -1,8 +1,6 @@
-/**
- * Note: To activate this adapter, update /src/adapters/index.ts to export sanityAdapter instead of mockAdapter.
- */
-
-import { CMSAdapter } from './cmsInterface';
+import { createClient } from '@sanity/client';
+import { env } from '@/lib/config/env';
+import { ICMSAdapter } from './cmsInterface';
 import { 
   BlogPost, 
   PortfolioItem, 
@@ -16,73 +14,109 @@ import {
   transformPortfolioItem 
 } from './transformers';
 
-const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID || '';
-const SANITY_DATASET = process.env.SANITY_DATASET || 'production';
-const SANITY_API_VERSION = '2021-10-21';
+/**
+ * Sanity Client Configuration
+ * Initialized with credentials from validated environment variables.
+ */
+const client = createClient({
+  projectId: env.SANITY_PROJECT_ID,
+  dataset: env.SANITY_DATASET,
+  useCdn: process.env.NODE_ENV === 'production',
+  apiVersion: '2023-05-03',
+  token: env.SANITY_API_TOKEN,
+});
 
-const SANITY_URL = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}`;
-
-async function sanityFetch<T>(query: string): Promise<T[]> {
-  if (!SANITY_PROJECT_ID) {
-    console.warn('CMS Error: SANITY_PROJECT_ID is not defined. Returning empty results.');
-    return [];
-  }
-
-  try {
-    const encodedQuery = encodeURIComponent(query);
-    const url = `${SANITY_URL}?query=${encodedQuery}`;
-
-    const res = await fetch(url, {
-      method: 'GET',
-      cache: 'no-store', // Development stub uses no-store for fresh results
-    });
-
-    if (!res.ok) {
-      throw new Error(`Sanity fetch failed with status: ${res.status}`);
-    }
-
-    const { result } = await res.json();
-    return result as T[];
-  } catch (error) {
-    console.error('Sanity fetch error:', error);
-    return [];
-  }
-}
-
-export const sanityAdapter: CMSAdapter = {
+/**
+ * sanityAdapter
+ * Production-ready CMS adapter utilizing the official Sanity client and GROQ queries.
+ * All raw data is processed through transformers to ensure strict type-safety.
+ */
+export const sanityAdapter: ICMSAdapter = {
   getBlogPosts: async (): Promise<BlogPost[]> => {
-    const query = '*[_type == "post"] | order(publishedAt desc)';
-    const results = await sanityFetch<RawBlogPost>(query);
+    const query = `*[_type == "post"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      "mainImage": { "asset": { "url": mainImage.asset->url } },
+      author->{ name, slug },
+      categories[]->{ title, slug },
+      tags,
+      readTime,
+      seo
+    }`;
+    const results = await client.fetch<RawBlogPost[]>(query);
     return results.map(transformBlogPost);
   },
 
   getBlogPost: async (slug: string): Promise<BlogPost | null> => {
-    const query = `*[_type == "post" && slug.current == "${slug}"][0]`;
-    const result = await sanityFetch<RawBlogPost>(query);
-    return result.length > 0 ? transformBlogPost(result[0]) : null;
+    const query = `*[_type == "post" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      body,
+      publishedAt,
+      "mainImage": { "asset": { "url": mainImage.asset->url } },
+      author->{ name, slug },
+      categories[]->{ title, slug },
+      tags,
+      readTime,
+      seo
+    }`;
+    const result = await client.fetch<RawBlogPost | null>(query, { slug });
+    return result ? transformBlogPost(result) : null;
   },
 
   getPortfolioItems: async (): Promise<PortfolioItem[]> => {
-    const query = '*[_type == "project"] | order(year desc)';
-    const results = await sanityFetch<RawPortfolioItem>(query);
+    const query = `*[_type == "project"] | order(year desc) {
+      _id,
+      title,
+      slug,
+      category,
+      year,
+      "mainImage": { "asset": { "url": mainImage.asset->url } },
+      description,
+      tags,
+      seo
+    }`;
+    const results = await client.fetch<RawPortfolioItem[]>(query);
     return results.map(transformPortfolioItem);
   },
 
   getPortfolioItem: async (slug: string): Promise<PortfolioItem | null> => {
-    const query = `*[_type == "project" && slug.current == "${slug}"][0]`;
-    const result = await sanityFetch<RawPortfolioItem>(query);
-    return result.length > 0 ? transformPortfolioItem(result[0]) : null;
+    const query = `*[_type == "project" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      category,
+      year,
+      "mainImage": { "asset": { "url": mainImage.asset->url } },
+      description,
+      tags,
+      seo,
+      client,
+      services,
+      liveUrl,
+      summary,
+      challenge,
+      solution,
+      "gallery": gallery[].asset->url,
+      results,
+      testimonial
+    }`;
+    const result = await client.fetch<RawPortfolioItem | null>(query, { slug });
+    return result ? transformPortfolioItem(result) : null;
   },
 
   getServices: async (): Promise<Service[]> => {
-    const query = '*[_type == "service"] | order(orderRank asc)';
-    const results = await sanityFetch<Service>(query);
-    return results;
+    const query = `*[_type == "service"] | order(orderRank asc)`;
+    return await client.fetch<Service[]>(query);
   },
 
   getService: async (slug: string): Promise<ServiceDetail | null> => {
-    const query = `*[_type == "service" && slug.current == "${slug}"][0]`;
-    const result = await sanityFetch<ServiceDetail>(query);
-    return result.length > 0 ? result[0] : null;
+    const query = `*[_type == "service" && slug.current == $slug][0]`;
+    return await client.fetch<ServiceDetail | null>(query, { slug });
   },
 };

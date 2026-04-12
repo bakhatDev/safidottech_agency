@@ -1,4 +1,4 @@
-import type { CMSAdapter } from './cmsInterface';
+import type { ICMSAdapter } from './cmsInterface';
 import { blogPosts } from '@/data/blog';
 import { portfolioItems } from '@/data/portfolio';
 import { services, serviceDetails } from '@/data/services';
@@ -9,7 +9,7 @@ import type { BlogPost, PortfolioItem, Service, ServiceDetail } from '@/types';
  * Uses static data from the /src/data directory.
  * Provides a seamless transition layer during development.
  */
-export const mockAdapter: CMSAdapter = {
+export const mockAdapter: ICMSAdapter = {
   getBlogPosts: async (): Promise<BlogPost[]> => {
     return blogPosts;
   },

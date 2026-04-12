@@ -4,7 +4,7 @@ import type { BlogPost, PortfolioItem, RawBlogPost, RawPortfolioItem, Service, S
  * CMSAdapter Interface
  * Defines the contract that all CMS adapters (mock or real) must implement.
  */
-export interface CMSAdapter {
+export interface ICMSAdapter {
   getBlogPosts(): Promise<BlogPost[]>;
   getBlogPost(slug: string): Promise<BlogPost | null>;
   getPortfolioItems(): Promise<PortfolioItem[]>;

@@ -5,6 +5,20 @@ export interface NavItem {
   children?: NavItem[];
 }
 
+// ── Storage ──────────────────────────────────────────────
+export interface StorageRef {
+  url: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+export interface IStorageAdapter {
+  upload(file: Buffer | string, options?: any): Promise<StorageRef>;
+  delete(publicId: string): Promise<void>;
+  getPublicUrl(publicId: string): string;
+}
+
 // ── Services ────────────────────────────────────────────
 export interface Service {
   id: string;
