@@ -64,7 +64,12 @@ export default function PortfolioPreview() {
       />
 
       <div className="relative">
-        <div className="overflow-hidden" ref={emblaRef}>
+        <div 
+          className="overflow-hidden" 
+          ref={emblaRef}
+          role="region"
+          aria-label="Portfolio showcase"
+        >
           <div className="flex ml-[-24px]">
             {displayItems.map((item) => (
               <div key={item.id} className="flex-[0_0_100%] md:flex-[0_0_50%] pl-[24px]">

@@ -32,6 +32,37 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
+  // Focus Trap for Mobile Menu
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const menu = document.getElementById('mobile-nav-menu');
+    if (!menu) return;
+
+    const focusableElements = menu.querySelectorAll('button, a, [tabindex]:not([tabindex="-1"])');
+    const firstFocusable = focusableElements[0] as HTMLElement;
+    const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstFocusable) {
+          lastFocusable.focus();
+          e.preventDefault();
+        }
+      } else {
+        if (document.activeElement === lastFocusable) {
+          firstFocusable.focus();
+          e.preventDefault();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   // Prevent scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -156,7 +187,9 @@ export default function Navbar() {
           <button
             onClick={toggleMobileMenu}
             className="lg:hidden relative z-50 p-2 text-white/80 hover:text-white transition-colors"
-            aria-label="Toggle menu"
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-nav-menu"
           >
             <div className="w-6 h-5 flex flex-col justify-between relative">
               <span className={cn("w-full h-0.5 bg-current rounded-full transition-all duration-300", isMobileMenuOpen ? "rotate-45 translate-y-[9px]" : "")}></span>
@@ -169,10 +202,14 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div 
+        id="mobile-nav-menu"
         className={cn(
           "fixed inset-0 bg-[#111111] z-40 lg:hidden transition-all duration-500 ease-in-out flex flex-col pt-24 pb-8",
           isMobileMenuOpen ? "opacity-100 visible h-screen" : "opacity-0 invisible h-0"
         )}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation Menu"
       >
         <div className="flex-1 overflow-y-auto px-6 hide-scrollbar flex flex-col justify-between">
           <nav className="flex flex-col space-y-2 mt-4">

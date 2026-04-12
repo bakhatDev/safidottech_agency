@@ -97,7 +97,12 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Right Column: Carousel */}
-        <div className="relative overflow-hidden" ref={emblaRef}>
+        <div 
+          className="relative overflow-hidden" 
+          ref={emblaRef}
+          role="region"
+          aria-label="Client testimonials carousel"
+        >
           <div className="flex ml-[-24px]">
             {testimonials.map((t) => (
               <div key={t.id} className="flex-[0_0_100%] md:flex-[0_0_50%] pl-[24px]">

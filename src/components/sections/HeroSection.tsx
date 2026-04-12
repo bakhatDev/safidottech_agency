@@ -20,46 +20,59 @@ export default function HeroSection() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const mm = gsap.matchMedia();
 
-      // Character stagger animation
-      tl.fromTo(
-        '.hero-char',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.04, duration: 0.6, delay: 0.2 }
-      );
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      // Eyebrow + Description fade in
-      tl.fromTo(
-        '.hero-eyebrow, .hero-desc',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.6 },
-        0.8
-      );
+        // Character stagger animation
+        tl.fromTo(
+          '.hero-char',
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.04, duration: 0.6, delay: 0.2 }
+        );
 
-      // CTAs fade up
-      tl.fromTo(
-        '.hero-ctas',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6 },
-        1.1
-      );
+        // Eyebrow + Description fade in
+        tl.fromTo(
+          '.hero-eyebrow, .hero-desc',
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6 },
+          0.8
+        );
 
-      // Right column fade in
-      tl.fromTo(
-        '.hero-visual',
-        { opacity: 0, scale: 0.95 },
-        { opacity: 1, scale: 1, duration: 0.8 },
-        0.6
-      );
+        // CTAs fade up
+        tl.fromTo(
+          '.hero-ctas',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          1.1
+        );
 
-      // Brand sub-row
-      tl.fromTo(
-        '.hero-brand-row',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 },
-        1.0
-      );
+        // Right column fade in
+        tl.fromTo(
+          '.hero-visual',
+          { opacity: 0, scale: 0.95 },
+          { opacity: 1, scale: 1, duration: 0.8 },
+          0.6
+        );
+
+        // Brand sub-row
+        tl.fromTo(
+          '.hero-brand-row',
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5 },
+          1.0
+        );
+      });
+
+      // Fallback for reduced motion: Set end states immediately
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set('.hero-char, .hero-eyebrow, .hero-desc, .hero-ctas, .hero-visual, .hero-brand-row', {
+          opacity: 1,
+          y: 0,
+          scale: 1
+        });
+      });
     },
     { scope: containerRef }
   );

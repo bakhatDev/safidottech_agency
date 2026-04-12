@@ -22,22 +22,31 @@ export default function StatCounter({ stat, className }: StatCounterProps) {
     () => {
       if (!numberRef.current) return;
 
-      const counter = { value: 0 };
+      const mm = gsap.matchMedia();
 
-      gsap.to(counter, {
-        value: stat.value,
-        duration: 2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 85%',
-          once: true,
-        },
-        onUpdate: () => {
-          if (numberRef.current) {
-            numberRef.current.textContent = Math.round(counter.value).toString();
-          }
-        },
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const counter = { value: 0 };
+        gsap.to(counter, {
+          value: stat.value,
+          duration: 2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+          onUpdate: () => {
+            if (numberRef.current) {
+              numberRef.current.textContent = Math.round(counter.value).toString();
+            }
+          },
+        });
+      });
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        if (numberRef.current) {
+          numberRef.current.textContent = stat.value.toString();
+        }
       });
     },
     { scope: containerRef }

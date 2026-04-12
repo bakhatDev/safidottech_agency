@@ -13,6 +13,7 @@ export interface ButtonProps {
   disabled?: boolean;
   type?: 'button' | 'submit';
   showArrow?: boolean;
+  ariaLabel?: string;
 }
 
 export default function Button({
@@ -25,6 +26,7 @@ export default function Button({
   disabled = false,
   type = 'button',
   showArrow = false,
+  ariaLabel,
 }: ButtonProps) {
   const baseStyles = 'rounded-full transition-all duration-300 inline-flex items-center justify-center';
   
@@ -52,7 +54,7 @@ export default function Button({
 
   if (href) {
     return (
-      <Link href={href} className={classes} onClick={onClick}>
+      <Link href={href} className={classes} onClick={onClick} aria-label={ariaLabel}>
         {content}
       </Link>
     );
@@ -64,6 +66,7 @@ export default function Button({
       className={classes}
       onClick={onClick}
       disabled={disabled}
+      aria-label={ariaLabel}
     >
       {content}
     </button>
