@@ -40,8 +40,15 @@ export default function ClientsSection() {
 
       {/* Marquee */}
       <LogoMarquee
-        items={['Vercel', 'Shopify', 'WordPress', 'Google', 'Cloudflare', 'GitHub']}
-        speed={25}
+        items={[
+          { label: 'Vercel', icon: 'fab fa-vercel' },
+          { label: 'Shopify', icon: 'fab fa-shopify' },
+          { label: 'WordPress', icon: 'fab fa-wordpress' },
+          { label: 'Google', icon: 'fab fa-google' },
+          { label: 'Cloudflare', icon: 'fab fa-cloudflare' },
+          { label: 'GitHub', icon: 'fab fa-github' },
+        ]}
+        speed={30}
       />
 
       {/* Section CTA */}

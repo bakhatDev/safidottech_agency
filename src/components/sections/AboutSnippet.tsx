@@ -17,7 +17,7 @@ export default function AboutSnippet() {
         {/* Left Column: Image */}
         <div className="relative aspect-square rounded-2xl overflow-hidden bg-[#1C1C1C] w-full">
           <OptimizedImage
-            src="/images/placeholder.svg"
+            src="/images/About Visual.jpg"
             alt="About SafiDotTech"
             fill
             objectFit="cover"

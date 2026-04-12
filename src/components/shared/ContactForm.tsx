@@ -171,8 +171,8 @@ export default function ContactForm() {
         />
 
         {/* Legal */}
-        <p className="text-[#666] text-[10px] mt-4 text-center">
-          By submitting this form you agree to our Privacy Policy. We never share your data with third parties.
+        <p className="text-[#666] text-[10px] mt-4 text-center leading-relaxed">
+          By submitting this form, you agree to our <a href="/privacy-policy" className="text-[#999] underline hover:text-[#C2F026] transition-colors">Privacy Policy</a>. We process your data according to GDPR standards and never share it with third parties.
         </p>
       </div>
     </form>

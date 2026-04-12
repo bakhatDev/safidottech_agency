@@ -3,50 +3,50 @@ import { TeamMember } from '@/types';
 export const teamMembers: TeamMember[] = [
   {
     id: 'tm1',
-    slug: 'alex-johnson',
-    name: 'Alex Johnson',
-    role: 'Chief Executive Officer',
+    slug: 'osman-safi',
+    name: 'Osman Safi',
+    role: 'Managing Director',
     category: 'Management',
-    image: '/images/placeholder.svg',
-    bio: 'Alex brings over 15 years of industry experience, driving the company vision and strategic growth.',
-    skills: ['Leadership', 'Strategy', 'Business Development'],
-    metaTitle: 'Alex Johnson - CEO | SafiDotTech Team',
-    metaDescription: 'Meet Alex Johnson, our CEO with 15 years of industry experience.'
+    image: '/images/team/team-lead.png',
+    bio: 'With over a decade of experience in digital strategy, Osman leads Safi Dot Tech with a focus on senior-led small teams that deliver big results.',
+    skills: ['Project Strategy', 'Client Relations', 'Operations'],
+    metaTitle: 'Osman Safi - Managing Director | SafiDotTech',
+    metaDescription: 'Meet Osman Safi, the Managing Director of Safi Dot Tech.'
   },
   {
     id: 'tm2',
-    slug: 'sarah-lee',
-    name: 'Sarah Lee',
-    role: 'Lead Developer',
+    slug: 'hammad-ali',
+    name: 'Hammad Ali',
+    role: 'Senior Full-Stack Engineer',
     category: 'Development',
-    image: '/images/placeholder.svg',
-    bio: 'Sarah is a full-stack expert who architects our most complex technical solutions with precision.',
-    skills: ['React', 'Node.js', 'System Architecture'],
-    metaTitle: 'Sarah Lee - Lead Developer | SafiDotTech Team',
-    metaDescription: 'Meet Sarah Lee, our Lead Developer specializing in full-stack architecture.'
+    image: '/images/team/senior-developer.png',
+    bio: 'Hammad is a MERN stack expert specializing in high-performance Next.js applications with sub-5s load speeds.',
+    skills: ['React/Next.js', 'Node.js', 'MongoDB', 'Performance Optimization'],
+    metaTitle: 'Hammad Ali - Senior Developer | SafiDotTech',
+    metaDescription: 'Meet Hammad Ali, our Senior Full-Stack Engineer expert in MERN stack.'
   },
   {
     id: 'tm3',
-    slug: 'david-smith',
-    name: 'David Smith',
-    role: 'UI/UX Designer',
+    slug: 'zainab-khan',
+    name: 'Zainab Khan',
+    role: 'Senior UI/UX Designer',
     category: 'Design',
-    image: '/images/placeholder.svg',
-    bio: 'David crafts intuitive and stunning user interfaces that elevate the digital products we build.',
-    skills: ['Figma', 'User Research', 'Interaction Design'],
-    metaTitle: 'David Smith - UI/UX Designer | SafiDotTech Team',
-    metaDescription: 'Meet David Smith, our creative UI/UX Designer.'
+    image: '/images/team/ui-ux-designer.png',
+    bio: 'Zainab crafts the "Dark Luxury" aesthetics that define Safi Dot Tech brands, focusing on high-conversion visual storytelling.',
+    skills: ['Figma', 'Visual Identity', 'UX Research'],
+    metaTitle: 'Zainab Khan - Senior Designer | SafiDotTech',
+    metaDescription: 'Meet Zainab Khan, our lead UI/UX designer specializing in luxury aesthetics.'
   },
   {
     id: 'tm4',
-    slug: 'emily-chen',
-    name: 'Emily Chen',
-    role: 'SEO Specialist',
+    slug: 'ali-ahmed',
+    name: 'Ali Ahmed',
+    role: 'Senior SEO Strategist',
     category: 'SEO',
-    image: '/images/placeholder.svg',
-    bio: 'Emily is a data-driven marketer who ensures our clients achieve top search engine rankings.',
-    skills: ['Technical SEO', 'Keyword Research', 'Analytics'],
-    metaTitle: 'Emily Chen - SEO Specialist | SafiDotTech Team',
-    metaDescription: 'Meet Emily Chen, our dedicated SEO Specialist.'
+    image: '/images/team/seo-specialist.png',
+    bio: 'Ali ensures that every line of code we write is optimized for search engines, delivering "Built-in SEO" from day one.',
+    skills: ['Technical SEO', 'Keyword Strategy', 'Domain Authority'],
+    metaTitle: 'Ali Ahmed - SEO Strategist | SafiDotTech',
+    metaDescription: 'Meet Ali Ahmed, our Senior SEO Strategist ensuring top rankings for clients.'
   }
 ];

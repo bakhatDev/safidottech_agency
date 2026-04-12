@@ -3,29 +3,29 @@ import { Testimonial } from '@/types';
 export const testimonials: Testimonial[] = [
   {
     id: 't1',
-    quote: 'SafiDotTech transformed our online presence. Their development process is seamless and the results are consistently outstanding.',
-    author: 'Sarah Jenkins',
-    title: 'Marketing Director',
-    country: 'USA',
+    quote: 'Safi Dot Tech rebuilt our Shopify store from scratch. It now loads in under 2 seconds and our conversion rate jumped 34% in the first month.',
+    author: 'Ahmed R.',
+    title: 'Store Owner',
+    country: 'UAE',
     rating: 5,
-    avatar: '/images/placeholder.svg'
+    avatar: '/images/testimonials/Ahmed R.png'
   },
   {
     id: 't2',
-    quote: 'The team goes above and beyond. We saw a 40% increase in traffic after they redesigned our e-commerce platform and optimized our SEO.',
-    author: 'Michael Chen',
-    title: 'Founder & CEO',
+    quote: 'They delivered a Next.js site with built-in SEO that ranked on Google within 6 weeks. Nobody else promised that.',
+    author: 'Sarah T.',
+    title: 'Startup Founder',
     country: 'UK',
     rating: 5,
-    avatar: '/images/placeholder.svg'
+    avatar: '/images/testimonials/Sarah T.png'
   },
   {
     id: 't3',
-    quote: 'Fast, reliable, and incredibly professional. Their frontend development work made our web application faster than we ever thought possible.',
-    author: 'Elena Rodriguez',
-    title: 'Product Manager',
-    country: 'Spain',
+    quote: 'Finally an agency that codes clean, communicates fast, and actually hits the deadline.',
+    author: 'Bilal K.',
+    title: 'E-commerce Manager',
+    country: 'Pakistan',
     rating: 5,
-    avatar: '/images/placeholder.svg'
+    avatar: '/images/testimonials/Bilal K.png'
   }
 ];

@@ -16,11 +16,33 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: { 
-    default: 'Web Design & SEO Agency | Safi Dot Tech', 
+    default: 'MERN Stack Web Development & SEO | Safi Dot Tech', 
     template: '%s | Safi Dot Tech' 
   },
-  description: 'MERN Stack web development with built-in SEO and sub-5s load speeds. Registered in Pakistan & UK. Free SEO audit. Serving clients globally.',
+  description: 'High-performance MERN stack development with built-in SEO and sub-5s load speeds. Registered in Pakistan & UK. Serving global clients with premium digital solutions.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://safidottech.com'),
+  openGraph: {
+    title: 'Safi Dot Tech | Premium Web Development & SEO',
+    description: 'Bespoke MERN stack engineering with a focus on speed, scalability, and search dominance.',
+    url: 'https://safidottech.com',
+    siteName: 'Safi Dot Tech',
+    images: [
+      {
+        url: '/images/Hero Visual.png',
+        width: 1200,
+        height: 630,
+        alt: 'Safi Dot Tech - Builds Fast. Ranks Higher.',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Safi Dot Tech | Premium Web Development & SEO',
+    description: 'High-performance MERN stack development with built-in SEO and sub-5s load speeds.',
+    images: ['/images/Hero Visual.png'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

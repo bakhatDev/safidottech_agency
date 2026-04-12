@@ -141,7 +141,7 @@ export default function HeroSection() {
           <div className="hero-visual relative aspect-square max-w-[440px] mx-auto hidden lg:block" style={{ opacity: 0 }}>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,_rgba(194,240,38,0.08)_0%,_transparent_70%)] rounded-full" />
             <OptimizedImage
-              src="/images/placeholder.svg"
+              src="/images/Hero Visual.png"
               alt="SafiDotTech Brand Visual"
               fill
               priority={true}
