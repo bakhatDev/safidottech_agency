@@ -82,8 +82,18 @@ export default function HeroSection() {
       bgColor="bg-[#111111]"
       className="min-h-[90vh] flex items-center relative overflow-hidden !py-0"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_50%_50%,_#1A1A1A_0%,_#111111_60%)] pointer-events-none" />
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <OptimizedImage
+          src="/images/hero bg.jpg"
+          alt="Hero Background"
+          fill
+          priority
+          objectFit="cover"
+          className="opacity-20 scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#111111]" />
+      </div>
 
       <div ref={containerRef} className="relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 py-[80px] lg:py-[160px] items-center">
