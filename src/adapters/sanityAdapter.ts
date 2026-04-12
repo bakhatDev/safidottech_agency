@@ -7,7 +7,9 @@ import {
   BlogPost, 
   PortfolioItem, 
   RawBlogPost, 
-  RawPortfolioItem 
+  RawPortfolioItem,
+  Service,
+  ServiceDetail
 } from '@/types';
 import { 
   transformBlogPost, 
@@ -57,7 +59,7 @@ export const sanityAdapter: CMSAdapter = {
   getBlogPost: async (slug: string): Promise<BlogPost | null> => {
     const query = `*[_type == "post" && slug.current == "${slug}"][0]`;
     const result = await sanityFetch<RawBlogPost>(query);
-    return result.length > 0 ? transformBlogPost(result[0] as unknown as RawBlogPost) : null;
+    return result.length > 0 ? transformBlogPost(result[0]) : null;
   },
 
   getPortfolioItems: async (): Promise<PortfolioItem[]> => {
@@ -69,18 +71,18 @@ export const sanityAdapter: CMSAdapter = {
   getPortfolioItem: async (slug: string): Promise<PortfolioItem | null> => {
     const query = `*[_type == "project" && slug.current == "${slug}"][0]`;
     const result = await sanityFetch<RawPortfolioItem>(query);
-    return result.length > 0 ? transformPortfolioItem(result[0] as unknown as RawPortfolioItem) : null;
+    return result.length > 0 ? transformPortfolioItem(result[0]) : null;
   },
 
-  getServices: async (): Promise<any[]> => {
+  getServices: async (): Promise<Service[]> => {
     const query = '*[_type == "service"] | order(orderRank asc)';
-    const results = await sanityFetch<any>(query);
-    return results; // Transformers for services can be added once schemas are final
+    const results = await sanityFetch<Service>(query);
+    return results;
   },
 
-  getService: async (slug: string): Promise<any | null> => {
+  getService: async (slug: string): Promise<ServiceDetail | null> => {
     const query = `*[_type == "service" && slug.current == "${slug}"][0]`;
-    const result = await sanityFetch<any>(query);
+    const result = await sanityFetch<ServiceDetail>(query);
     return result.length > 0 ? result[0] : null;
   },
 };

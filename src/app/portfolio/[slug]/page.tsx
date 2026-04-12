@@ -40,17 +40,15 @@ export default async function PortfolioDetailsPage({ params }: PageProps) {
     notFound();
   }
 
-  // Safely casting to any to handle optional fields not strictly defined in PortfolioItem type yet
-  const anyItem = item as any;
-  const client = anyItem.client || 'Confidential Client';
-  const services = anyItem.services || item.tags || [];
-  const liveUrl = anyItem.liveUrl;
-  const summary = anyItem.summary || item.description;
-  const challenge = anyItem.challenge || 'Our client needed to scale their platform to handle increased traffic and improve user engagement. The legacy systems were creating bottlenecks and negative user experiences.';
-  const solution = anyItem.solution || 'We implemented a modern, component-driven architecture using Next.js to significantly boost performance. We integrated advanced caching strategies and optimized database queries.';
-  const gallery = anyItem.gallery || [];
-  const results = anyItem.results || [];
-  const testimonial = anyItem.testimonial;
+  const client = item.client || 'Confidential Client';
+  const services = item.services || item.tags || [];
+  const liveUrl = item.liveUrl;
+  const summary = item.summary || item.description;
+  const challenge = item.challenge || 'Our client needed to scale their platform to handle increased traffic and improve user engagement. The legacy systems were creating bottlenecks and negative user experiences.';
+  const solution = item.solution || 'We implemented a modern, component-driven architecture using Next.js to significantly boost performance. We integrated advanced caching strategies and optimized database queries.';
+  const gallery = item.gallery || [];
+  const results = item.results || [];
+  const testimonial = item.testimonial;
 
   // Filter out current project
   const relatedProjects = portfolioItems.filter(p => p.id !== item.id).slice(0, 2);
@@ -182,7 +180,7 @@ export default async function PortfolioDetailsPage({ params }: PageProps) {
               <div className="flex items-center gap-4">
                 {testimonial.avatar && (
                   <div className="w-14 h-14 relative rounded-full overflow-hidden border border-[#2A2A2A]">
-                    <OptimizedImage src={testimonial.avatar} alt={testimonial.name} fill className="object-cover" />
+                    <OptimizedImage src={testimonial.avatar} alt={testimonial.name || 'Client Avatar'} fill className="object-cover" />
                   </div>
                 )}
                 <div>

@@ -8,8 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function useScrollAnimation(
   animationFn: (el: HTMLElement) => void,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  deps: any[] = []
+  deps: unknown[] = []
 ) {
   const ref = useRef<HTMLDivElement>(null);
   

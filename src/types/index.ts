@@ -39,6 +39,22 @@ export interface PortfolioItem {
   tags: string[];
   metaTitle: string;
   metaDescription: string;
+  // Detail fields
+  client?: string;
+  services?: string[];
+  liveUrl?: string;
+  summary?: string;
+  challenge?: string;
+  solution?: string;
+  gallery?: string[];
+  results?: Array<{ label: string; value: string }>;
+  testimonial?: {
+    quote: string;
+    author?: string;
+    role?: string;
+    name?: string;
+    avatar?: string;
+  };
 }
 
 // ── Team ─────────────────────────────────────────────────
@@ -164,6 +180,22 @@ export interface RawPortfolioItem {
   description?: string;
   tags?: string[];
   seo?: { metaTitle?: string; metaDescription?: string };
+  // Raw detail fields
+  client?: string;
+  services?: string[];
+  liveUrl?: string;
+  summary?: string;
+  challenge?: string;
+  solution?: string;
+  gallery?: string[];
+  results?: Array<{ label: string; value: string }>;
+  testimonial?: {
+    quote: string;
+    author?: string;
+    role?: string;
+    name?: string;
+    avatar?: string;
+  };
 }
 
 // ── Currency ──────────────────────────────────────────────

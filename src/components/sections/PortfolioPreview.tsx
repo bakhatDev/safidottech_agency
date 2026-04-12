@@ -34,11 +34,11 @@ export default function PortfolioPreview() {
     [emblaApi]
   );
 
-  const onInit = useCallback((emblaApi: any) => {
+  const onInit = useCallback((emblaApi: NonNullable<ReturnType<typeof useEmblaCarousel>[1]>) => {
     setScrollSnaps(emblaApi.scrollSnapList());
   }, []);
 
-  const onSelect = useCallback((emblaApi: any) => {
+  const onSelect = useCallback((emblaApi: NonNullable<ReturnType<typeof useEmblaCarousel>[1]>) => {
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, []);
 
