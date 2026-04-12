@@ -85,5 +85,15 @@ export const pageMetadata = {
     description: 'Get a free quote, SEO audit, or consultation. Web development, SEO, and e-commerce. Registered in Pakistan & UK. We respond within 24h.', 
     path: '/contact' 
   }),
+  privacy: generatePageMetadata({ 
+    title: 'Privacy Policy | Safi Dot Tech', 
+    description: 'Our commitment to your data security. Learn how Safi Dot Tech collects, uses, and protects your personal information in compliance with GDPR.', 
+    path: '/privacy-policy' 
+  }),
+  terms: generatePageMetadata({ 
+    title: 'Terms of Service | Safi Dot Tech', 
+    description: 'Read our Terms of Service. Important information regarding project acceptance, payments, intellectual property, and governing law.', 
+    path: '/terms' 
+  }),
 };
 
