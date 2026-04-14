@@ -1,4 +1,4 @@
-import type { BlogPost, PortfolioItem, RawBlogPost, RawPortfolioItem } from '@/types';
+import type { BlogPost, PortfolioItem, RawBlogPost, RawPortfolioItem, Service, ServiceDetail, RawService } from '@/types';
 
 /**
  * transformBlogPost
@@ -40,5 +40,40 @@ export function transformPortfolioItem(raw: RawPortfolioItem): PortfolioItem {
     tags: raw.tags ?? [],
     metaTitle: raw.seo?.metaTitle ?? raw.title,
     metaDescription: raw.seo?.metaDescription ?? raw.description ?? '',
+  };
+}
+
+/**
+ * transformService
+ * Maps raw CMS service data to the internal Service type.
+ */
+export function transformService(raw: RawService): Service {
+  return {
+    id: raw._id,
+    slug: raw.slug.current,
+    title: raw.title,
+    description: raw.description ?? '',
+    shortDesc: raw.shortDesc ?? '',
+    icon: raw.icon ?? 'fas fa-cube',
+    features: raw.features ?? [],
+    metaTitle: raw.seo?.metaTitle ?? raw.title,
+    metaDescription: raw.seo?.metaDescription ?? raw.description ?? '',
+  };
+}
+
+/**
+ * transformServiceDetail
+ * Maps raw CMS service data to the internal ServiceDetail type (includes detail fields).
+ */
+export function transformServiceDetail(raw: RawService): ServiceDetail {
+  return {
+    ...transformService(raw),
+    heroTitle: raw.heroTitle ?? `${raw.title} That Ranks.`,
+    fullDescription: raw.fullDescription ?? raw.description ?? '',
+    baseUSD: raw.baseUSD ?? 0,
+    basePKR: raw.basePKR ?? 0,
+    gallery: raw.gallery?.map(g => g.asset?.url) ?? [],
+    process: raw.process ?? [],
+    faqs: raw.faqs ?? [],
   };
 }

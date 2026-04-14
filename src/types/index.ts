@@ -211,6 +211,25 @@ export interface RawPortfolioItem {
     avatar?: string;
   };
 }
+export interface RawService {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description?: string;
+  shortDesc?: string;
+  icon?: string;
+  features?: string[];
+  seo?: { metaTitle?: string; metaDescription?: string };
+  // Detail fields
+  heroTitle?: string;
+  fullDescription?: string;
+  baseUSD?: number;
+  basePKR?: number;
+  gallery?: Array<{ asset: { url: string } }>;
+  process?: ProcessStep[];
+  faqs?: FAQItem[];
+  orderRank?: number;
+}
 
 // ── Currency ──────────────────────────────────────────────
 export type Currency = 'USD' | 'PKR';

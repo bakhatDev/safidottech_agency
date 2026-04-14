@@ -1,17 +1,20 @@
 import { createClient } from '@sanity/client';
 import { env } from '@/lib/config/env';
 import { ICMSAdapter } from './cmsInterface';
-import { 
-  BlogPost, 
-  PortfolioItem, 
-  RawBlogPost, 
+import {
+  BlogPost,
+  PortfolioItem,
+  RawBlogPost,
   RawPortfolioItem,
   Service,
-  ServiceDetail
+  ServiceDetail,
+  RawService
 } from '@/types';
-import { 
-  transformBlogPost, 
-  transformPortfolioItem 
+import {
+  transformBlogPost,
+  transformPortfolioItem,
+  transformService,
+  transformServiceDetail
 } from './transformers';
 
 /**
@@ -111,12 +114,41 @@ export const sanityAdapter: ICMSAdapter = {
   },
 
   getServices: async (): Promise<Service[]> => {
-    const query = `*[_type == "service"] | order(orderRank asc)`;
-    return await client.fetch<Service[]>(query);
+    const query = `*[_type == "service"] | order(orderRank asc, _createdAt asc) {
+      _id,
+      title,
+      slug,
+      description,
+      shortDesc,
+      icon,
+      features,
+      seo,
+      orderRank
+    }`;
+    const results = await client.fetch<RawService[]>(query);
+    return results.map(transformService);
   },
 
   getService: async (slug: string): Promise<ServiceDetail | null> => {
-    const query = `*[_type == "service" && slug.current == $slug][0]`;
-    return await client.fetch<ServiceDetail | null>(query, { slug });
+    const query = `*[_type == "service" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      description,
+      shortDesc,
+      icon,
+      features,
+      seo,
+      heroTitle,
+      fullDescription,
+      baseUSD,
+      basePKR,
+      "gallery": gallery[].asset->{url},
+      process,
+      faqs,
+      orderRank
+    }`;
+    const result = await client.fetch<RawService | null>(query, { slug });
+    return result ? transformServiceDetail(result) : null;
   },
 };
