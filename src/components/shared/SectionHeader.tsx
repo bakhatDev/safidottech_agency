@@ -25,11 +25,11 @@ export default function SectionHeader({
       )}
     >
       {eyebrow && <EyebrowLabel text={eyebrow} />}
-      <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
         {heading}
       </h2>
       {subheading && (
-        <p className="text-[#999] text-lg max-w-2xl">{subheading}</p>
+        <p className="text-base text-[#999] max-w-2xl">{subheading}</p>
       )}
     </div>
   );

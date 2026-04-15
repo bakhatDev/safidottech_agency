@@ -80,7 +80,7 @@ export default function HeroSection() {
   return (
     <SectionContainer
       bgColor="bg-[#111111]"
-      className="min-h-[90vh] flex items-center relative overflow-hidden !py-0"
+      className="min-h-[90vh] flex items-center relative overflow-hidden"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -96,7 +96,7 @@ export default function HeroSection() {
       </div>
 
       <div ref={containerRef} className="relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 py-[80px] lg:py-[160px] items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 md:gap-12 py-12 md:py-20 lg:py-32 items-center">
           {/* Left Column */}
           <div>
             {/* Eyebrow */}
@@ -105,7 +105,7 @@ export default function HeroSection() {
             </p>
 
             {/* Headline */}
-            <h1 className="text-6xl lg:text-8xl font-bold leading-none uppercase">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-none uppercase">
               <span className="block text-[#C2F026] italic mb-2">
                 {splitToChars('Builds Fast.')}
               </span>
@@ -151,7 +151,7 @@ export default function HeroSection() {
           <div className="hero-visual relative w-full aspect-square max-w-[440px] mx-auto hidden lg:flex items-center justify-center" style={{ opacity: 0 }}>
             {/* Ambient Background Glow */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,_rgba(194,240,38,0.1)_0%,_transparent_70%)] rounded-full blur-2xl" />
-            
+
             <OptimizedImage
               src="/images/hero-visual.png"
               alt="SafiDotTech Brand Visual"
