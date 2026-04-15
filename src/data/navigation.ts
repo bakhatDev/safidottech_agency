@@ -1,7 +1,6 @@
 import { NavItem } from '@/types';
 
 export const navItems: NavItem[] = [
-  { label: 'Home', href: '/' },
   {
     label: 'Services',
     href: '/services',
@@ -14,17 +13,8 @@ export const navItems: NavItem[] = [
   },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'Pricing', href: '/pricing' },
-  {
-    label: 'Blog',
-    href: '/blog',
-    children: [
-      { label: 'All Posts', href: '/blog' },
-      { label: 'Technology', href: '/blog/technology' },
-      { label: 'Marketing', href: '/blog/marketing' },
-    ],
-  },
+  { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/about' },
-  { label: 'Team', href: '/team' },
   { label: 'Contact', href: '/contact' },
   { label: 'Get In Touch', href: '/contact' }
 ];

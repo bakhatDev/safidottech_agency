@@ -106,25 +106,28 @@ export default function Navbar() {
             {navItems.map((item) => {
               const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/');
               const hasChildren = item.children && item.children.length > 0;
-              
+
               if (item.label === 'Get In Touch' || item.label === 'Client Login') return null;
 
               if (hasChildren) {
                 return (
                   <div key={item.label} className="relative group">
-                    <button className={cn(
-                      "flex items-center space-x-1 text-sm font-medium transition-colors hover:text-[#C2F026]",
-                      isActive || (pathname.startsWith('/services') && item.label === 'Services') ? "text-[#C2F026]" : "text-white/80"
-                    )}>
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "flex items-center space-x-1 text-sm font-medium transition-colors hover:text-[#C2F026]",
+                        isActive ? "text-[#C2F026]" : "text-white/80"
+                      )}
+                    >
                       <span>{item.label}</span>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:rotate-180 transition-transform duration-300"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
+                    </Link>
                     {/* Dropdown */}
                     <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                       <div className="bg-[#1C1C1C] border border-[#2A2A2A] rounded-xl shadow-xl overflow-hidden min-w-[240px] p-2 flex flex-col gap-1">
                         {item.children?.map(child => (
-                          <Link 
-                            key={child.href} 
+                          <Link
+                            key={child.href}
                             href={child.href}
                             className="px-4 py-3 text-sm text-white/80 hover:bg-white/5 hover:text-[#C2F026] rounded-lg transition-colors whitespace-nowrap block"
                           >
@@ -154,8 +157,8 @@ export default function Navbar() {
 
           {/* Controls - Right (Desktop) */}
           <div className="hidden lg:flex items-center justify-end space-x-6">
-            {/* Currency Toggle */}
-            <div className="flex items-center bg-[#111111] border border-[#2A2A2A] rounded-full overflow-hidden p-1">
+            {/* Currency Toggle - HIDDEN */}
+            {/* <div className="flex items-center bg-[#111111] border border-[#2A2A2A] rounded-full overflow-hidden p-1">
               <button
                 onClick={() => setCurrency('USD')}
                 className={cn(
@@ -174,11 +177,12 @@ export default function Navbar() {
               >
                 PKR
               </button>
-            </div>
+            </div> */}
 
             {/* CTAs */}
             <div className="flex items-center space-x-3">
-              <Button label="Client Login" variant="ghost" size="sm" href="/login" />
+              {/* Client Login - HIDDEN */}
+              {/* <Button label="Client Login" variant="ghost" size="sm" href="/login" /> */}
               <Button label="Get In Touch" variant="lime" size="sm" href="/contact" />
             </div>
           </div>
@@ -217,29 +221,57 @@ export default function Navbar() {
               const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/');
               const hasChildren = item.children && item.children.length > 0;
               const isDropdownOpen = mobileDropdownOpen === item.label;
-              
+
               if (item.label === 'Get In Touch' || item.label === 'Client Login') return null;
 
               if (hasChildren) {
                 return (
                   <div key={item.label} className="border-b border-white/10 pb-2">
-                    <button 
-                      onClick={() => toggleMobileDropdown(item.label)}
-                      className="w-full flex items-center justify-between py-4 text-2xl font-bold text-white tracking-tight"
-                    >
-                      <span className={cn(isActive || (pathname.startsWith('/services') && item.label === 'Services') ? "text-[#C2F026]" : "")}>{item.label}</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={cn("opacity-70 transition-transform duration-300", isDropdownOpen ? "rotate-180 text-[#C2F026]" : "")}><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </button>
-                    
-                    <div 
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          "flex-1 py-4 text-2xl font-bold tracking-tight transition-colors hover:text-[#C2F026]",
+                          isActive ? "text-[#C2F026]" : "text-white"
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                      <button
+                        onClick={() => toggleMobileDropdown(item.label)}
+                        className="p-2 text-white/80 hover:text-[#C2F026] transition-colors"
+                        aria-label={`Toggle ${item.label} submenu`}
+                        aria-expanded={isDropdownOpen}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className={cn(
+                            "opacity-70 transition-transform duration-300",
+                            isDropdownOpen ? "rotate-180 text-[#C2F026]" : ""
+                          )}
+                        >
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div
                       className={cn(
                         "overflow-hidden transition-all duration-300 flex flex-col space-y-1 pl-4",
                         isDropdownOpen ? "max-h-[400px] opacity-100 py-2" : "max-h-0 opacity-0 my-0"
                       )}
                     >
                       {item.children?.map(child => (
-                        <Link 
-                          key={child.href} 
+                        <Link
+                          key={child.href}
                           href={child.href}
                           className="py-3 text-lg text-white/70 hover:text-[#C2F026]"
                         >
@@ -268,8 +300,8 @@ export default function Navbar() {
           </nav>
           
           <div className="mt-12 flex flex-col space-y-6">
-            {/* Currency Toggle Mobile */}
-            <div className="flex flex-col space-y-3">
+            {/* Currency Toggle Mobile - HIDDEN */}
+            {/* <div className="flex flex-col space-y-3">
               <span className="text-sm text-white/50 font-medium uppercase tracking-wider">Currency</span>
               <div className="flex items-center bg-[#1C1C1C] rounded-full p-1 w-full max-w-[200px]">
                 <button
@@ -291,11 +323,12 @@ export default function Navbar() {
                   PKR
                 </button>
               </div>
-            </div>
-            
+            </div> */}
+
             <div className="flex flex-col space-y-4 pt-4 border-t border-white/10">
               <Button label="Get In Touch" variant="lime" size="lg" className="w-full justify-center" href="/contact" />
-              <Button label="Client Login" variant="ghost" size="lg" className="w-full justify-center" href="/login" />
+              {/* Client Login Mobile - HIDDEN */}
+              {/* <Button label="Client Login" variant="ghost" size="lg" className="w-full justify-center" href="/login" /> */}
             </div>
           </div>
         </div>
