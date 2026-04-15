@@ -17,7 +17,14 @@ export const mockAdapter: ICMSAdapter = {
   getBlogPost: async (slug: string): Promise<BlogPost | null> => {
     return blogPosts.find((p) => p.slug === slug) ?? null;
   },
-  
+
+  getRecentBlogPosts: async (count: number): Promise<BlogPost[]> => {
+    const sorted = [...blogPosts].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+    return sorted.slice(0, count);
+  },
+
   getPortfolioItems: async (): Promise<PortfolioItem[]> => {
     return portfolioItems;
   },

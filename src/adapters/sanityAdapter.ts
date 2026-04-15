@@ -36,14 +36,24 @@ const client = createClient({
  */
 export const sanityAdapter: ICMSAdapter = {
   getBlogPosts: async (): Promise<BlogPost[]> => {
-    const query = `*[_type == "post"] | order(publishedAt desc) {
+    const query = `*[_type == "post"] | order(publishedAt desc, _createdAt desc) {
       _id,
       title,
       slug,
       excerpt,
       publishedAt,
       "mainImage": { "asset": { "url": mainImage.asset->url } },
-      author->{ name, slug },
+      author->{
+        name,
+        slug,
+        role,
+        "image": image.asset->url,
+        bio,
+        "socialLinks": {
+          "linkedin": linkedin,
+          "github": github
+        }
+      },
       categories[]->{ title, slug },
       tags,
       readTime,
@@ -62,7 +72,17 @@ export const sanityAdapter: ICMSAdapter = {
       body,
       publishedAt,
       "mainImage": { "asset": { "url": mainImage.asset->url } },
-      author->{ name, slug },
+      author->{
+        name,
+        slug,
+        role,
+        "image": image.asset->url,
+        bio,
+        "socialLinks": {
+          "linkedin": linkedin,
+          "github": github
+        }
+      },
       categories[]->{ title, slug },
       tags,
       readTime,
@@ -70,6 +90,34 @@ export const sanityAdapter: ICMSAdapter = {
     }`;
     const result = await client.fetch<RawBlogPost | null>(query, { slug });
     return result ? transformBlogPost(result) : null;
+  },
+
+  getRecentBlogPosts: async (count: number): Promise<BlogPost[]> => {
+    const query = `*[_type == "post"] | order(publishedAt desc, _createdAt desc)[0...${count}] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      "mainImage": { "asset": { "url": mainImage.asset->url } },
+      author->{
+        name,
+        slug,
+        role,
+        "image": image.asset->url,
+        bio,
+        "socialLinks": {
+          "linkedin": linkedin,
+          "github": github
+        }
+      },
+      categories[]->{ title, slug },
+      tags,
+      readTime,
+      seo
+    }`;
+    const results = await client.fetch<RawBlogPost[]>(query);
+    return results.map(transformBlogPost);
   },
 
   getPortfolioItems: async (): Promise<PortfolioItem[]> => {

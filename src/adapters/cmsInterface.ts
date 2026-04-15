@@ -7,6 +7,7 @@ import type { BlogPost, PortfolioItem, RawBlogPost, RawPortfolioItem, Service, S
 export interface ICMSAdapter {
   getBlogPosts(): Promise<BlogPost[]>;
   getBlogPost(slug: string): Promise<BlogPost | null>;
+  getRecentBlogPosts(count: number): Promise<BlogPost[]>;
   getPortfolioItems(): Promise<PortfolioItem[]>;
   getPortfolioItem(slug: string): Promise<PortfolioItem | null>;
   getServices(): Promise<Service[]>;

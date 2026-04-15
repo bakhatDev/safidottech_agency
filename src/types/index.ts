@@ -96,6 +96,10 @@ export interface BlogPost {
   content: string;
   author: string;
   authorSlug: string;
+  authorImage?: string;
+  authorBio?: string;
+  authorRole?: string;
+  authorSocialLinks?: { linkedin?: string; github?: string };
   date: string;
   category: string;
   categorySlug: string;
@@ -176,7 +180,14 @@ export interface RawBlogPost {
   slug: { current: string };
   excerpt?: string;
   body?: unknown;
-  author?: { name: string; slug?: { current: string } };
+  author?: {
+    name: string;
+    slug?: { current: string };
+    image?: string;
+    bio?: string;
+    role?: string;
+    socialLinks?: { linkedin?: string; github?: string };
+  };
   publishedAt?: string;
   mainImage?: { asset: { url: string } };
   categories?: Array<{ title: string; slug: { current: string } }>;

@@ -1,0 +1,22 @@
+{
+  "name": "sanity-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev --port 3333",
+    "build": "sanity build",
+    "preview": "sanity preview",
+    "start": "sanity start"
+  },
+  "dependencies": {
+    "lucide-react": "^0.408.0",
+    "sanity": "^5.20.0",
+    "styled-components": "^6.1.0"
+  },
+  "devDependencies": {
+    "@sanity/cli": "^3.37.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,3 +1,5 @@
+'use server';
+
 import { cmsAdapter } from '@/adapters';
 import type { BlogPost } from '@/types';
 
@@ -20,8 +22,5 @@ export async function getBlogPostsByAuthor(authorSlug: string): Promise<BlogPost
 }
 
 export async function getRecentBlogPosts(count: number): Promise<BlogPost[]> {
-  const posts = await cmsAdapter.getBlogPosts();
-  return posts
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, count);
+  return cmsAdapter.getRecentBlogPosts(count);
 }
